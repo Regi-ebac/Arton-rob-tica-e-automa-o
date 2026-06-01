@@ -1,10 +1,97 @@
 /********** Template CSS **********/
 :root {
-    --primary: #0d6efd;
-    --light: #F5F5F5;
-    --dark: #0d6efd;
+    --primary: #002060;   /* Azul Marinho Principal (Elegante e corporativo) */
+    --secondary: #0070C0; /* Azul Royal/Aceso (Perfeito para o botão "Faça seu orçamento") */
+    --light: #F4F7FA;     /* Branco levemente azulado para fundos limpos */
+    --dark: #1C2434;      /* Cinza-escuro azulado para textos legíveis e rodapé */
+}
+/* ==========================================================
+   FORÇAR PADRÃO AZUL DA ARTON ROBOTICS NO MENU DE NAVEGAÇÃO
+   ========================================================== */
+.navbar-light .navbar-nav .nav-link {
+    color: #002060 !important; /* Cor padrão para todos os links (Azul Marinho) */
+}
+/* ==========================================================
+   AJUSTE DE ALTURA DA NAVBAR E REDIMENSIONAMENTO DO LOGO
+   ========================================================== */
+
+/* 1. Remove qualquer altura fixa da barra e adiciona espaçamento em cima e embaixo */
+.navbar {
+    height: auto !important;
+    min-height: 120px; /* Garante uma altura mínima robusta para a barra branca */
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
+/* 2. Permite que o link do bloco do logo acompanhe a nova altura */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    height: 100% !important;
+    padding: 0 !important;
+}
+
+/* 3. Força o logo a aceitar o novo tamanho sem travas do template */
+.navbar-brand img {
+    max-height: 110px !important; /* Altura máxima permitida para o logo */
+    width: auto !important;        /* Mantém a proporção perfeita do desenho */
+}
+
+/* 4. Alinha os links do menu verticalmente com o novo centro da barra */
+.navbar-nav .nav-link {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: #0070C0 !important; /* Cor ao passar o mouse ou página ativa (Azul Vivo) */
+}
+/* ==========================================
+   FORÇAR COR AZUL NO ITEM ATIVO DO MENU (NAV-LINK)
+   ========================================== */
+.navbar-light .navbar-nav .nav-link.active {
+    color: #0070C0 !important; /* Aplica o azul aceso de destaque */
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #002060 !important; /* Azul marinho corporativo ao passar o mouse */
+}
+/* ==========================================
+   FORÇAR O PADRÃO AZUL NOS ÍCONES DO SITE
+   ========================================== */
+
+/* 1. Ícones do Topo (Redes Sociais) e pequenos ícones de contato */
+.fa-facebook-f, .fa-whatsapp, .fa-linkedin-in, .fa-instagram,
+.fa-map-marker-alt, .fa-clock, .fa-phone-alt {
+    color: var(--secondary) !important; /* Aplica o azul aceso estilo Azul Linhas Aéreas */
+}
+
+/* Efeito de passar o mouse nas redes sociais do topo */
+.btn-sm-square:hover i {
+    color: var(--primary) !important; /* Muda para o azul marinho no hover */
+}
+
+/* 2. Ícones Maiores das Seções (Vantagens, Serviços e Recursos) */
+.fa-user-check, .fa-check, .fa-drafting-compass, .fa-headphones, .fa-users {
+    color: var(--secondary) !important; /* Transforma o laranja/marrom em azul de destaque */
+}
+
+/* Garante que os ícones dentro de caixas cinzas ou brancas conversem bem com o novo design */
+.bg-light i, .bg-white i {
+    color: var(--secondary) !important;
+}
+/* Procure por este bloco no seu css/style.css e garanta que ele esteja exatamente assim: */
+.btn.btn-primary {
+    background-color: var(--secondary) !important; /* Força o azul royal */
+    border-color: var(--secondary) !important;
+    color: #FFFFFF !important;
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--primary) !important; /* Força o azul marinho no hover */
+    border-color: var(--primary) !important;
+}
 /*** pagina Obrigado ***/
 
 .main {
@@ -13,7 +100,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #0d6efd;
+    background: #002060;
     flex-direction: column;
 }
 
@@ -32,7 +119,7 @@
     padding: 15px 55px;
     background: var(--light);
     text-decoration: none;
-    color: #0d6efd;
+    color: #002060;
     font-size: 18px;
     transition: all 0.5s;
     border-radius: 16px;
@@ -184,37 +271,63 @@
 }
 
 
-/*** Header ***/
+/*** Header (Carrossel Ajustado) ***/
+/* Configuração para Computadores e Telas Grandes */
+
+
+.header-carousel .owl-carousel-item {
+    position: relative;
+    max-height: 450px;
+    overflow: hidden;
+    background: #002060; /* Fundo escuro caso a imagem não ocupe toda a largura */
+}
+
+.header-carousel .owl-carousel-item img {
+    width: 100%;
+    height: 450px;
+    object-fit: contain; /* Ajusta a imagem inteira dentro do espaço, sem zoom e sem cortes */
+    object-position: center;
+}
+
+/* Configuração Responsiva para Celulares e Tablets */
 @media (max-width: 768px) {
     .header-carousel .owl-carousel-item {
-        position: relative;
-        min-height: 500px;
+        min-height: 320px; /* Reduzido de 500px para 320px (padrão mobile) */
+        max-height: 350px;
     }
     
     .header-carousel .owl-carousel-item img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
+        height: 320px; /* Ajusta a imagem no celular */
         object-fit: cover;
     }
 
+    /* Ajuste dos textos para caberem na nova altura menor */
     .header-carousel .owl-carousel-item h5,
     .header-carousel .owl-carousel-item p {
-        font-size: 14px !important;
+        font-size: 13px !important;
         font-weight: 400 !important;
+        margin-bottom: 10px !important;
     }
 
     .header-carousel .owl-carousel-item h1 {
-        font-size: 30px;
+        font-size: 22px !important; /* Reduzido para não quebrar muitas linhas */
         font-weight: 600;
+        margin-bottom: 15px !important;
+    }
+    
+    /* Esconde os botões extras no celular se o espaço ficar muito apertado */
+    .header-carousel .owl-carousel-item .btn {
+        padding: 6px 15px !important;
+        font-size: 13px;
     }
 }
 
+/* Setas de Navegação (Prev/Next) */
 .header-carousel .owl-nav {
     position: absolute;
     width: 200px;
     height: 45px;
-    bottom: 30px;
+    bottom: 20px; /* Subiu um pouco para alinhar com o novo tamanho */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -223,15 +336,15 @@
 
 .header-carousel .owl-nav .owl-prev,
 .header-carousel .owl-nav .owl-next {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.3); /* Um fundo sutil para dar leitura sobre a foto */
     border: 1px solid #FFFFFF;
-    font-size: 22px;
+    font-size: 20px;
     transition: .5s;
 }
 
@@ -241,10 +354,11 @@
     border-color: var(--primary);
 }
 
+/* Pontinhos de Navegação (Dots) */
 .header-carousel .owl-dots {
     position: absolute;
     height: 45px;
-    bottom: 30px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -256,8 +370,8 @@
     position: relative;
     display: inline-block;
     margin: 0 5px;
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
     background: transparent;
     border: 1px solid #FFFFFF;
     transition: .5s;
@@ -266,10 +380,10 @@
 .header-carousel .owl-dot::after {
     position: absolute;
     content: "";
-    width: 5px;
-    height: 5px;
-    top: 4px;
-    left: 4px;
+    width: 4px;
+    height: 4px;
+    top: 3px;
+    left: 3px;
     background: transparent;
     border: 1px solid #FFFFFF;
 }
@@ -279,8 +393,9 @@
     border-color: var(--primary);
 }
 
+/* Bônus: Correção do caminho da imagem que estava quebrado (url(../imgimg\khi-robo.jpg)) */
 .page-header {
-    background: linear-gradient(rgba(53, 53, 53, .7), rgba(53, 53, 53, .7)), url(../img/carrocel1\ \(2\).jpg) center center no-repeat;
+    background: linear-gradient(rgba(53, 53, 53, .7), rgba(53, 53, 53, .7)), url(../img/khi-robo.jpg) center center no-repeat;
     background-size: cover;
 }
 
